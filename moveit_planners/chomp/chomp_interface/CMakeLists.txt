@@ -38,6 +38,7 @@ include_directories(
 add_library(${PROJECT_NAME} src/chomp_interface.cpp src/chomp_planning_context.cpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_library(chomp_planner_plugin src/chomp_plugin.cpp)
 set_target_properties(chomp_planner_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
@@ -53,7 +54,7 @@ install(DIRECTORY include/chomp_interface/
 install(TARGETS ${PROJECT_NAME} chomp_planner_plugin
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 )
 
 if(CATKIN_ENABLE_TESTING)

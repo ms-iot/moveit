@@ -1009,7 +1009,7 @@ const std::string ConfigurationFilesWidget::getPackageName(std::string package_p
   std::string package_name;
   fs::path fs_package_path = package_path;
 
-  package_name = fs_package_path.filename().c_str();
+  package_name = fs_package_path.filename().string();
 
   // check for empty
   if (package_name.empty())
