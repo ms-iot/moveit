@@ -73,7 +73,7 @@ void getCostMarkers(visualization_msgs::MarkerArray& arr, const std::string& fra
     mk.ns = "cost_source";
     mk.id = id++;
     mk.type = visualization_msgs::Marker::CUBE;
-    mk.action = visualization_msgs::Marker::ADD;
+    mk.action = visualization_msgs::Marker::MK_ADD;
     mk.pose.position.x = (cost_source.aabb_max[0] + cost_source.aabb_min[0]) / 2.0;
     mk.pose.position.y = (cost_source.aabb_max[1] + cost_source.aabb_min[1]) / 2.0;
     mk.pose.position.z = (cost_source.aabb_max[2] + cost_source.aabb_min[2]) / 2.0;
@@ -113,7 +113,7 @@ void getCollisionMarkersFromContacts(visualization_msgs::MarkerArray& arr, const
       mk.ns = ns_name;
       mk.id = ns_counts[ns_name];
       mk.type = visualization_msgs::Marker::SPHERE;
-      mk.action = visualization_msgs::Marker::ADD;
+      mk.action = visualization_msgs::Marker::MK_ADD;
       mk.pose.position.x = contact.pos.x();
       mk.pose.position.y = contact.pos.y();
       mk.pose.position.z = contact.pos.z();

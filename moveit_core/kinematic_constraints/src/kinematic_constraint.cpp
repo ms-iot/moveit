@@ -859,7 +859,7 @@ void VisibilityConstraint::getMarkers(const robot_state::RobotState& state,
   mk.header.stamp = ros::Time::now();
   mk.ns = "constraints";
   mk.id = 1;
-  mk.action = visualization_msgs::Marker::ADD;
+  mk.action = visualization_msgs::Marker::MK_ADD;
   mk.pose.position.x = 0;
   mk.pose.position.y = 0;
   mk.pose.position.z = 0;
@@ -884,7 +884,7 @@ void VisibilityConstraint::getMarkers(const robot_state::RobotState& state,
 
   visualization_msgs::Marker mka;
   mka.type = visualization_msgs::Marker::ARROW;
-  mka.action = visualization_msgs::Marker::ADD;
+  mka.action = visualization_msgs::Marker::MK_ADD;
   mka.color = mk.color;
   mka.pose = mk.pose;
 

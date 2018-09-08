@@ -2,12 +2,14 @@ cmake_minimum_required(VERSION 2.8.12)
 project(moveit_core)
 
 if(NOT MSVC)
-add_compile_options(-std=c++11)
+  add_compile_options(-std=c++11)
 
-# Warnings
-add_definitions(-Wall -Wextra
-  -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
-  -Wno-unused-parameter -Wno-unused-function -Wno-maybe-uninitialized)
+  # Warnings
+  add_definitions(-Wall -Wextra
+    -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
+    -Wno-unused-parameter -Wno-unused-function -Wno-maybe-uninitialized)
+else()
+  add_compile_options(/Zc:__cplusplus)
 endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -17,7 +19,7 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-find_package(Boost REQUIRED system filesystem date_time thread iostreams)
+find_package(Boost REQUIRED system filesystem date_time thread iostreams zlib)
 
 find_package(Eigen3 REQUIRED)
 
@@ -29,8 +31,14 @@ endif()
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(LIBFCL REQUIRED fcl)
+pkg_check_modules(LIBCCD REQUIRED ccd)
 find_library(LIBFCL_LIBRARIES_FULL ${LIBFCL_LIBRARIES} ${LIBFCL_LIBRARY_DIRS})
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
 set(LIBFCL_LIBRARIES "${LIBFCL_LIBRARIES_FULL}")
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+
+find_package(orocos_kdl)
+find_library(KDL_LIBRARY REQUIRED NAMES orocos-kdl HINTS ${orocos_kdl_LIBRARY_DIRS})
 
 find_package(octomap REQUIRED)
 

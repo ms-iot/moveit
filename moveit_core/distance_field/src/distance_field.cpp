@@ -94,7 +94,7 @@ void DistanceField::getIsoSurfaceMarkers(double min_distance, double max_distanc
   inf_marker.ns = "distance_field";
   inf_marker.id = 1;
   inf_marker.type = visualization_msgs::Marker::CUBE_LIST;
-  inf_marker.action = visualization_msgs::Marker::MODIFY;
+  inf_marker.action = visualization_msgs::Marker::MK_MODIFY;
   inf_marker.scale.x = resolution_;
   inf_marker.scale.y = resolution_;
   inf_marker.scale.z = resolution_;
@@ -162,7 +162,7 @@ void DistanceField::getGradientMarkers(double min_distance, double max_distance,
           marker.ns = "distance_field_gradient";
           marker.id = id++;
           marker.type = visualization_msgs::Marker::ARROW;
-          marker.action = visualization_msgs::Marker::ADD;
+          marker.action = visualization_msgs::Marker::MK_ADD;
 
           marker.pose.position.x = worldX;
           marker.pose.position.y = worldY;
@@ -340,7 +340,7 @@ void DistanceField::getPlaneMarkers(PlaneVisualizationType type, double length, 
   plane_marker.ns = "distance_field_plane";
   plane_marker.id = 1;
   plane_marker.type = visualization_msgs::Marker::CUBE_LIST;
-  plane_marker.action = visualization_msgs::Marker::ADD;
+  plane_marker.action = visualization_msgs::Marker::MK_ADD;
   plane_marker.scale.x = resolution_;
   plane_marker.scale.y = resolution_;
   plane_marker.scale.z = resolution_;
@@ -504,7 +504,7 @@ void DistanceField::getProjectionPlanes(const std::string& frame_id, const ros::
   marker.ns = "distance_field_projection_plane";
   marker.id = 1;
   marker.type = visualization_msgs::Marker::CUBE_LIST;
-  marker.action = visualization_msgs::Marker::MODIFY;
+  marker.action = visualization_msgs::Marker::MK_MODIFY;
   marker.scale.x = getResolution();
   marker.scale.y = getResolution();
   marker.scale.z = getResolution();
