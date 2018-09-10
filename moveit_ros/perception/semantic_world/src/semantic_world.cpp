@@ -71,7 +71,7 @@ SemanticWorld::getPlaceLocationsMarker(const std::vector<geometry_msgs::PoseStam
   for (std::size_t i = 0; i < poses.size(); ++i)
   {
     visualization_msgs::Marker m;
-    m.action = m.ADD;
+    m.action = m.MK_ADD;
     m.type = m.SPHERE;
     m.ns = "place_locations";
     m.id = i;

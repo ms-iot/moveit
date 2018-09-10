@@ -9,7 +9,8 @@ add_library(${MOVEIT_LIB_NAME}
   )
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 
-target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${gl_LIBS} glut GLEW)
+target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${gl_LIBS} ${GLUT_LIBRARIES} ${GLEW_LIBRARIES})
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 if (CATKIN_ENABLE_TESTING)
   # Can only run this test if we have a display
@@ -21,5 +22,7 @@ if (CATKIN_ENABLE_TESTING)
   endif()
 endif()
 
-install(TARGETS ${MOVEIT_LIB_NAME} LIBRARY DESTINATION lib)
+install(TARGETS ${MOVEIT_LIB_NAME}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 install(DIRECTORY include/ DESTINATION include)
