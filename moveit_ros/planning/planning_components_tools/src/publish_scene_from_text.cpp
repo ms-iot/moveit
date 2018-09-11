@@ -91,7 +91,7 @@ int main(int argc, char** argv)
       else
         pub_scene.publish(ps_msg.world);
 
-      sleep(1);
+      ros::Duration(1).sleep();
     }
     else
       ROS_WARN("Unable to load '%s'.", argv[filename_index]);

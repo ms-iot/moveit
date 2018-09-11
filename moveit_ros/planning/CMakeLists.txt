@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(moveit_ros_planning)
 
-add_compile_options(-std=c++11)
+if(NOT MSVC)
+  add_compile_options(-std=c++11)
+else()
+  add_compile_options(/Zc:__cplusplus)
+  add_definitions(-DNOMINMAX)
+endif()
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)

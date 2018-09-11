@@ -78,7 +78,7 @@ int main(int argc, char** argv)
     mk.ns = "bounding_box";
     mk.id = 0;
     mk.type = visualization_msgs::Marker::CUBE;
-    mk.action = visualization_msgs::Marker::ADD;
+    mk.action = visualization_msgs::Marker::MK_ADD;
     mk.pose.position.x = (aabb[0] + aabb[1]) / 2.0;
     mk.pose.position.y = (aabb[2] + aabb[3]) / 2.0;
     mk.pose.position.z = (aabb[4] + aabb[5]) / 2.0;
@@ -130,7 +130,7 @@ int main(int argc, char** argv)
             mk.ns = "colliding";
             mk.id = k;
             mk.type = visualization_msgs::Marker::SPHERE;
-            mk.action = visualization_msgs::Marker::ADD;
+            mk.action = visualization_msgs::Marker::MK_ADD;
             mk.pose.position.x = points[k].x();
             mk.pose.position.y = points[k].y();
             mk.pose.position.z = points[k].z();
