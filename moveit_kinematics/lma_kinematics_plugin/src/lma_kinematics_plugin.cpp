@@ -82,9 +82,9 @@ void LMAKinematicsPlugin::getRandomConfiguration(const KDL::JntArray& seed_state
                                                  KDL::JntArray& jnt_array, bool lock_redundancy) const
 {
   std::vector<double> values(dimension_, 0.0);
-  std::vector<double> near(dimension_, 0.0);
+  std::vector<double> _near(dimension_, 0.0);
   for (std::size_t i = 0; i < dimension_; ++i)
-    near[i] = seed_state(i);
+    _near[i] = seed_state(i);
 
   // Need to resize the consistency limits to remove mimic joints
   std::vector<double> consistency_limits_mimic;
@@ -95,7 +95,7 @@ void LMAKinematicsPlugin::getRandomConfiguration(const KDL::JntArray& seed_state
     consistency_limits_mimic.push_back(consistency_limits[i]);
   }
 
-  joint_model_group_->getVariableRandomPositionsNearBy(state_->getRandomNumberGenerator(), values, near,
+  joint_model_group_->getVariableRandomPositionsNearBy(state_->getRandomNumberGenerator(), values, _near,
                                                        consistency_limits_mimic);
 
   for (std::size_t i = 0; i < dimension_; ++i)

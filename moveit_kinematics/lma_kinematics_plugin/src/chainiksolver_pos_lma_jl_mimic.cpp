@@ -34,6 +34,8 @@
 
 /* Author: Francisco Suarez-Ruiz */
 
+#define _USE_MATH_DEFINES
+
 #include "moveit/lma_kinematics_plugin/chainiksolver_pos_lma_jl_mimic.h"
 #include <ros/console.h>
 

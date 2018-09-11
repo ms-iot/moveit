@@ -9,7 +9,10 @@ set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VE
 target_link_libraries(${MOVEIT_LIB_NAME}
     ${Boost_FILESYSTEM_LIBRARY}
     ${catkin_LIBRARIES})
-install(TARGETS ${MOVEIT_LIB_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+install(TARGETS ${MOVEIT_LIB_NAME} 
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 if(trac_ik_kinematics_plugin_FOUND)
     include_directories(${trac_ik_kinematics_plugin_INCLUDE_DIRS})
@@ -24,11 +27,14 @@ target_link_libraries(${MOVEIT_LIB_NAME}
     moveit_kdl_kinematics_plugin
     moveit_srv_kinematics_plugin
     ${catkin_LIBRARIES})
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 if(trac_ik_kinematics_plugin_FOUND)
     target_link_libraries(${MOVEIT_LIB_NAME} trac_ik_kinematics_plugin)
     set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES COMPILE_DEFINITIONS "CACHED_IK_KINEMATICS_TRAC_IK")
 endif()
-install(TARGETS ${MOVEIT_LIB_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+install(TARGETS ${MOVEIT_LIB_NAME} 
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 # This is just for testing purposes; the arms from Universal Robots have
 # analytic solvers, so caching just adds extra overhead.
@@ -43,7 +49,9 @@ if(ur_kinematics_FOUND)
             moveit_cached_ik_kinematics_base
             ${ur${UR}_pluginlib}
             ${catkin_LIBRARIES})
-        install(TARGETS ${MOVEIT_LIB_NAME} LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+        install(TARGETS ${MOVEIT_LIB_NAME} 
+                LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+                ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
     endforeach()
 endif()
 
