@@ -30,6 +30,7 @@ target_link_libraries(${MOVEIT_LIB_NAME}
   ${QT_LIBRARIES}
   ${Boost_LIBRARIES}
 )
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(DIRECTORY include/ DESTINATION include)
 
