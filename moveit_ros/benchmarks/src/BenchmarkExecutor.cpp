@@ -43,7 +43,11 @@
 #include <boost/math/constants/constants.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#ifndef WIN32
 #include <unistd.h>
+#else
+#include <winsock2.h>
+#endif
 
 using namespace moveit_ros_benchmarks;
 
