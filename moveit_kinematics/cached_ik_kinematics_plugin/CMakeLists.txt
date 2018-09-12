@@ -12,7 +12,8 @@ target_link_libraries(${MOVEIT_LIB_NAME}
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 install(TARGETS ${MOVEIT_LIB_NAME} 
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 if(trac_ik_kinematics_plugin_FOUND)
     include_directories(${trac_ik_kinematics_plugin_INCLUDE_DIRS})
@@ -34,7 +35,8 @@ if(trac_ik_kinematics_plugin_FOUND)
 endif()
 install(TARGETS ${MOVEIT_LIB_NAME} 
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 # This is just for testing purposes; the arms from Universal Robots have
 # analytic solvers, so caching just adds extra overhead.
@@ -51,7 +53,8 @@ if(ur_kinematics_FOUND)
             ${catkin_LIBRARIES})
         install(TARGETS ${MOVEIT_LIB_NAME} 
                 LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-                ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+                ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+                RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
     endforeach()
 endif()
 

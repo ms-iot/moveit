@@ -64,7 +64,7 @@ void addTArrowMarker(visualization_msgs::InteractiveMarker& im)
   m.scale.z = 0.12 * im.scale;
   m.ns = "goal_pose_arrow_marker";
   m.id = 1;
-  m.action = visualization_msgs::Marker::ADD;
+  m.action = visualization_msgs::Marker::MK_ADD;
   m.header = im.header;
   m.pose = im.pose;
   // Arrow points along Z
@@ -85,7 +85,7 @@ void addTArrowMarker(visualization_msgs::InteractiveMarker& im)
   mc.scale.z = 0.15 * im.scale;
   mc.ns = "goal_pose_arrow_marker";
   mc.id = 2;
-  mc.action = visualization_msgs::Marker::ADD;
+  mc.action = visualization_msgs::Marker::MK_ADD;
   mc.header = im.header;
   mc.pose = im.pose;
   // Cylinder points along Y
@@ -121,7 +121,7 @@ void addErrorMarker(visualization_msgs::InteractiveMarker& im)
   err.mesh_resource = "package://moveit_ros_planning_interface/resources/access-denied.dae";
   err.ns = "robot_interaction_error";
   err.id = 1;
-  err.action = visualization_msgs::Marker::ADD;
+  err.action = visualization_msgs::Marker::MK_ADD;
   err.header = im.header;
   err.pose = im.pose;
   err.pose.orientation.x = err.pose.orientation.y = 0.7071067811865476;

@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(moveit_ros_move_group)
 
-add_compile_options(-std=c++11)
+if(NOT MSVC)
+  add_compile_options(-std=c++11)
+else()
+  add_compile_options(/Zc:__cplusplus)
+endif()
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
@@ -64,9 +68,13 @@ set_target_properties(moveit_move_group_default_capabilities PROPERTIES VERSION 
 add_dependencies(moveit_move_group_default_capabilities ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(moveit_move_group_capabilities_base PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(move_group moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(move_group PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(moveit_move_group_default_capabilities moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(moveit_move_group_default_capabilities PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 target_link_libraries(list_move_group_capabilities ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(list_move_group_capabilities PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS move_group list_move_group_capabilities moveit_move_group_capabilities_base moveit_move_group_default_capabilities
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
