@@ -262,10 +262,10 @@ ompl::base::StateSamplerPtr ompl_interface::ModelBasedStateSpace::allocDefaultSt
       state->as<StateType>()->clearKnownInformation();
     }
 
-    void sampleUniformNear(ompl::base::State* state, const ompl::base::State* near, const double distance) override
+    void sampleUniformNear(ompl::base::State* state, const ompl::base::State* _near, const double distance) override
     {
       joint_model_group_->getVariableRandomPositionsNearBy(moveit_rng_, state->as<StateType>()->values, *joint_bounds_,
-                                                           near->as<StateType>()->values, distance);
+                                                           _near->as<StateType>()->values, distance);
       state->as<StateType>()->clearKnownInformation();
     }
 

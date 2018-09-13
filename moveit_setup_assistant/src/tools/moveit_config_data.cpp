@@ -1650,7 +1650,7 @@ std::string MoveItConfigData::appendPaths(const std::string& path1, const std::s
 {
   fs::path result = path1;
   result /= path2;
-  return result.make_preferred().native().c_str();
+  return result.make_preferred().string();
 }
 
 srdf::Model::Group* MoveItConfigData::findGroupByName(const std::string& name)

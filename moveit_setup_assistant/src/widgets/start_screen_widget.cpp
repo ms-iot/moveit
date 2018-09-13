@@ -61,6 +61,11 @@
 // MoveIt
 #include <moveit/rdf_loader/rdf_loader.h>
 
+#ifdef WIN32
+#include <direct.h>
+#define chdir _chdir
+#endif
+
 namespace moveit_setup_assistant
 {
 // Boost file system
@@ -424,14 +429,14 @@ bool StartScreenWidget::loadExistingFiles()
   fs::path kinematics_yaml_path = config_data_->config_pkg_path_;
   kinematics_yaml_path /= "config/kinematics.yaml";
 
-  if (!config_data_->inputKinematicsYAML(kinematics_yaml_path.make_preferred().native().c_str()))
+  if (!config_data_->inputKinematicsYAML(kinematics_yaml_path.make_preferred().string().c_str()))
   {
     QMessageBox::warning(this, "No Kinematic YAML File",
                          QString("Failed to parse kinematics yaml file. This file is not critical but any previous "
                                  "kinematic solver settings have been lost. To re-populate this file edit each "
                                  "existing planning group and choose a solver, then save each change. \n\nFile error "
                                  "at location ")
-                             .append(kinematics_yaml_path.make_preferred().native().c_str()));
+                             .append(kinematics_yaml_path.make_preferred().string().c_str()));
   }
 
   // Load 3d_sensors config file
@@ -440,11 +445,11 @@ bool StartScreenWidget::loadExistingFiles()
   // Load ros controllers yaml file if available-----------------------------------------------
   fs::path ros_controllers_yaml_path = config_data_->config_pkg_path_;
   ros_controllers_yaml_path /= "config/ros_controllers.yaml";
-  config_data_->inputROSControllersYAML(ros_controllers_yaml_path.make_preferred().native().c_str());
+  config_data_->inputROSControllersYAML(ros_controllers_yaml_path.make_preferred().string().c_str());
 
   fs::path ompl_yaml_path = config_data_->config_pkg_path_;
   ompl_yaml_path /= "config/ompl_planning.yaml";
-  config_data_->inputOMPLYAML(ompl_yaml_path.make_preferred().native().c_str());
+  config_data_->inputOMPLYAML(ompl_yaml_path.make_preferred().string().c_str());
 
   // DONE LOADING --------------------------------------------------------------------------
 
@@ -585,7 +590,7 @@ bool StartScreenWidget::loadURDFFile(const std::string& urdf_file_path, const st
   while (!nh.ok() && steps < 4)
   {
     ROS_WARN("Waiting for node handle");
-    sleep(1);
+    ros::Duration(1).sleep();
     steps++;
     ros::spinOnce();
   }
@@ -634,7 +639,7 @@ bool StartScreenWidget::setSRDFFile(const std::string& srdf_string)
   while (!nh.ok() && steps < 4)
   {
     ROS_WARN("Waiting for node handle");
-    sleep(1);
+    ros::Duration(1).sleep();
     steps++;
     ros::spinOnce();
   }
@@ -669,7 +674,7 @@ bool StartScreenWidget::extractPackageNameFromPath()
 
   // Copy path into vector of parts
   for (fs::path::iterator it = urdf_directory.begin(); it != urdf_directory.end(); ++it)
-    path_parts.push_back(it->native());
+    path_parts.push_back(it->string());
 
   bool packageFound = false;
 
@@ -694,7 +699,7 @@ bool StartScreenWidget::extractPackageNameFromPath()
     // check if this directory has a package.xml
     package_path = sub_path;
     package_path /= "package.xml";
-    ROS_DEBUG_STREAM("Checking for " << package_path.make_preferred().native());
+    ROS_DEBUG_STREAM("Checking for " << package_path.make_preferred().string());
 
     // Check if the files exist
     if (fs::is_regular_file(package_path) || fs::is_regular_file(sub_path / "manifest.xml"))
@@ -735,7 +740,7 @@ bool StartScreenWidget::extractPackageNameFromPath()
 
     // Success
     config_data_->urdf_pkg_name_ = package_name;
-    config_data_->urdf_pkg_relative_path_ = relative_path.make_preferred().native();
+    config_data_->urdf_pkg_relative_path_ = relative_path.make_preferred().string();
   }
 
   ROS_DEBUG_STREAM("URDF Package Name: " << config_data_->urdf_pkg_name_);
@@ -804,13 +809,13 @@ bool StartScreenWidget::load3DSensorsFile()
   if (!fs::is_regular_file(sensors_3d_yaml_path))
   {
     sensors_3d_yaml_path = "resources/default_config/sensors_3d.yaml";
-    return config_data_->input3DSensorsYAML(sensors_3d_yaml_path.make_preferred().native().c_str());
+    return config_data_->input3DSensorsYAML(sensors_3d_yaml_path.make_preferred().string().c_str());
   }
   else
   {
     fs::path default_sensors_3d_yaml_path = "resources/default_config/sensors_3d.yaml";
-    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().native().c_str(),
-                                            sensors_3d_yaml_path.make_preferred().native().c_str());
+    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().string().c_str(),
+                                            sensors_3d_yaml_path.make_preferred().string().c_str());
   }
 }
 

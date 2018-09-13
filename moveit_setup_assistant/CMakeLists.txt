@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(moveit_setup_assistant)
 
-add_compile_options(-std=c++11)
+if(NOT MSVC)
+  add_compile_options(-std=c++11)
+else()
+  add_compile_options(/Zc:__cplusplus)
+endif()
 
 # definition needed for boost/math/constants/constants.hpp included by Ogre to compile
 add_definitions(-DBOOST_MATH_DISABLE_FLOAT128)
@@ -95,6 +99,7 @@ target_link_libraries(${PROJECT_NAME}_tools
   ${Boost_LIBRARIES}
   ${QT_LIBRARIES}
 )
+set_target_properties(${PROJECT_NAME}_tools PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # Main Widgets Library - all screens (navigation options)
 add_library(${PROJECT_NAME}_widgets
@@ -127,6 +132,7 @@ target_link_libraries(${PROJECT_NAME}_widgets
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
 )
+set_target_properties(${PROJECT_NAME}_widgets PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # executables
 add_executable(${PROJECT_NAME} src/setup_assistant_main.cpp)
