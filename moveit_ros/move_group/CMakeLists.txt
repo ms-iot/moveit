@@ -79,7 +79,7 @@ set_target_properties(list_move_group_capabilities PROPERTIES WINDOWS_EXPORT_ALL
 install(TARGETS move_group list_move_group_capabilities moveit_move_group_capabilities_base moveit_move_group_default_capabilities
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 
 install(DIRECTORY include/ DESTINATION include)
 

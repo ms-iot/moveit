@@ -28,5 +28,5 @@ install(TARGETS
   moveit_evaluate_state_operations_speed
   moveit_kinematics_speed_and_validity_evaluator
   moveit_publish_scene_from_text
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 
