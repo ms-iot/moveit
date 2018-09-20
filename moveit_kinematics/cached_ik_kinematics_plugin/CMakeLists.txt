@@ -36,7 +36,7 @@ endif()
 install(TARGETS ${MOVEIT_LIB_NAME} 
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+        RUNTIME DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
 
 # This is just for testing purposes; the arms from Universal Robots have
 # analytic solvers, so caching just adds extra overhead.
@@ -54,7 +54,7 @@ if(ur_kinematics_FOUND)
         install(TARGETS ${MOVEIT_LIB_NAME} 
                 LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
                 ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-                RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+                RUNTIME DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
     endforeach()
 endif()
 
