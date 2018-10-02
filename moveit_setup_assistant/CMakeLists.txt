@@ -147,7 +147,11 @@ set_target_properties(${PROJECT_NAME}_updater
                       PROPERTIES OUTPUT_NAME collisions_updater
                       PREFIX "")
 
-install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_widgets ${PROJECT_NAME}_tools ${PROJECT_NAME}_updater
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_updater
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+install(TARGETS ${PROJECT_NAME}_widgets ${PROJECT_NAME}_tools
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 install(DIRECTORY include/ DESTINATION include)
