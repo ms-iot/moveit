@@ -95,10 +95,10 @@ public:
     space_->copyState(state, state_storage_->getState(rng_.uniformInt(0, max_index_)));
   }
 
-  void sampleUniformNear(ob::State* state, const ob::State* _near, const double distance) override
+  void sampleUniformNear(ob::State* state, const ob::State* near, const double distance) override
   {
     int index = -1;
-    int tag = _near->as<ModelBasedStateSpace::StateType>()->tag;
+    int tag = near->as<ModelBasedStateSpace::StateType>()->tag;
 
     if (tag >= 0)
     {
@@ -120,12 +120,12 @@ public:
     if (index < 0)
       index = rng_.uniformInt(0, max_index_);
 
-    double dist = space_->distance(_near, state_storage_->getState(index));
+    double dist = space_->distance(near, state_storage_->getState(index));
 
     if (dist > distance)
     {
       double d = pow(rng_.uniform01(), inv_dim_) * distance;
-      space_->interpolate(_near, state_storage_->getState(index), d / dist, state);
+      space_->interpolate(near, state_storage_->getState(index), d / dist, state);
     }
     else
       space_->copyState(state, state_storage_->getState(index));
