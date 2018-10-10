@@ -310,9 +310,9 @@ ompl::base::StateSamplerPtr ompl_interface::PoseModelStateSpace::allocDefaultSta
       afterStateSample(state);
     }
 
-    void sampleUniformNear(ompl::base::State* state, const ompl::base::State* _near, const double distance) override
+    void sampleUniformNear(ompl::base::State* state, const ompl::base::State* near, const double distance) override
     {
-      sampler_->sampleUniformNear(state, _near, distance);
+      sampler_->sampleUniformNear(state, near, distance);
       afterStateSample(state);
     }
 
