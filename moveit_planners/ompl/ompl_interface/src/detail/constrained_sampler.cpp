@@ -85,20 +85,20 @@ void ompl_interface::ConstrainedSampler::sampleUniform(ob::State* state)
     default_->sampleUniform(state);
 }
 
-void ompl_interface::ConstrainedSampler::sampleUniformNear(ob::State* state, const ob::State* _near,
+void ompl_interface::ConstrainedSampler::sampleUniformNear(ob::State* state, const ob::State* near,
                                                            const double distance)
 {
   if (sampleC(state) || sampleC(state) || sampleC(state))
   {
-    double total_d = space_->distance(state, _near);
+    double total_d = space_->distance(state, near);
     if (total_d > distance)
     {
       double dist = pow(rng_.uniform01(), inv_dim_) * distance;
-      space_->interpolate(_near, state, dist / total_d, state);
+      space_->interpolate(near, state, dist / total_d, state);
     }
   }
   else
-    default_->sampleUniformNear(state, _near, distance);
+    default_->sampleUniformNear(state, near, distance);
 }
 
 void ompl_interface::ConstrainedSampler::sampleGaussian(ob::State* state, const ob::State* mean, const double stdDev)
