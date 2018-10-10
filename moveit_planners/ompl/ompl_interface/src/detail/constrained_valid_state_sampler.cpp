@@ -99,16 +99,16 @@ bool ompl_interface::ValidConstrainedSampler::sample(ob::State* state)
   return false;
 }
 
-bool ompl_interface::ValidConstrainedSampler::sampleNear(ompl::base::State* state, const ompl::base::State* _near,
+bool ompl_interface::ValidConstrainedSampler::sampleNear(ompl::base::State* state, const ompl::base::State* near,
                                                          const double distance)
 {
   if (!sample(state))
     return false;
-  double total_d = si_->distance(state, _near);
+  double total_d = si_->distance(state, near);
   if (total_d > distance)
   {
     double dist = pow(rng_.uniform01(), inv_dim_) * distance;
-    si_->getStateSpace()->interpolate(_near, state, dist / total_d, state);
+    si_->getStateSpace()->interpolate(near, state, dist / total_d, state);
     planning_context_->getOMPLStateSpace()->copyToRobotState(work_state_, state);
     if (!kinematic_constraint_set_->decide(work_state_).satisfied)
       return false;
