@@ -1,12 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(moveit_ros_control_interface)
 
-if(NOT MSVC)
-  add_compile_options(-std=c++11)
-else()
-  add_compile_options(/Zc:__cplusplus)
-  add_definitions(-DNO_STRICT)
-endif()
+add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
   actionlib
