@@ -1,12 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(moveit_planners_ompl)
 
-if(NOT MSVC)
-  # C++ 11 required for OMPL
-  add_compile_options(-std=c++11)
-else()
-  add_compile_options(/Zc:__cplusplus)
-endif()
+# C++ 11 required for OMPL
+add_compile_options(-std=c++11)
 
 if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
