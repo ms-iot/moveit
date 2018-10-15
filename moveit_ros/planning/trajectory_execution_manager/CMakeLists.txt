@@ -9,7 +9,7 @@ add_dependencies(${MOVEIT_LIB_NAME} ${moveit_ros_planning_EXPORTED_TARGETS}) # d
 install(TARGETS ${MOVEIT_LIB_NAME}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 install(DIRECTORY include/ DESTINATION include)
 
 add_library(test_controller_manager_plugin test/test_moveit_controller_manager_plugin.cpp)

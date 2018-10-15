@@ -5,14 +5,16 @@ add_library(${MOVEIT_LIB_NAME}_core
   include/moveit/planning_scene_rviz_plugin/planning_scene_display.h)
 set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 target_link_libraries(${MOVEIT_LIB_NAME}_core moveit_rviz_plugin_render_tools ${catkin_LIBRARIES} ${OGRE_LIBRARIES} ${QT_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_library(${MOVEIT_LIB_NAME} src/plugin_init.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 target_link_libraries(${MOVEIT_LIB_NAME} ${MOVEIT_LIB_NAME}_core ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(DIRECTORY include/ DESTINATION include)
 
 install(TARGETS ${MOVEIT_LIB_NAME}_core ${MOVEIT_LIB_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})

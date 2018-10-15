@@ -95,6 +95,7 @@ target_link_libraries(${PROJECT_NAME}_tools
   ${Boost_LIBRARIES}
   ${QT_LIBRARIES}
 )
+set_target_properties(${PROJECT_NAME}_tools PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # Main Widgets Library - all screens (navigation options)
 add_library(${PROJECT_NAME}_widgets
@@ -127,6 +128,7 @@ target_link_libraries(${PROJECT_NAME}_widgets
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
 )
+set_target_properties(${PROJECT_NAME}_widgets PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # executables
 add_executable(${PROJECT_NAME} src/setup_assistant_main.cpp)
@@ -141,9 +143,13 @@ set_target_properties(${PROJECT_NAME}_updater
                       PROPERTIES OUTPUT_NAME collisions_updater
                       PREFIX "")
 
-install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_widgets ${PROJECT_NAME}_tools ${PROJECT_NAME}_updater
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_updater
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+install(TARGETS ${PROJECT_NAME}_widgets ${PROJECT_NAME}_tools
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 install(DIRECTORY include/ DESTINATION include)
 
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
