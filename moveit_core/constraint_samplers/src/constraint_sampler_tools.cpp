@@ -109,7 +109,7 @@ void constraint_samplers::visualizeDistribution(const ConstraintSamplerPtr& samp
     mk.ns = "constraint_samples";
     mk.id = i;
     mk.type = visualization_msgs::Marker::SPHERE;
-    mk.action = visualization_msgs::Marker::MK_ADD;
+    mk.action = visualization_msgs::Marker::ADD;
     mk.pose.position.x = pos.x();
     mk.pose.position.y = pos.y();
     mk.pose.position.z = pos.z();
