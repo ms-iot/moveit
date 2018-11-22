@@ -9,3 +9,4 @@ jobs:
 - template: build.yml@templates  # Template reference
   parameters:
     ros_metapackage: 'ros-melodic-moveit'
+    custom_test_timeout: 30
