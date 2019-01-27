@@ -18,7 +18,7 @@ set_target_properties(${MOVEIT_LIB_NAME}_python PROPERTIES LIBRARY_OUTPUT_DIRECT
 set_target_properties(${MOVEIT_LIB_NAME}_python PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 if(WIN32)
-  set_target_properties(${MOVEIT_LIB_NAME}_python PROPERTIES SUFFIX pyd)
+  set_target_properties(${MOVEIT_LIB_NAME}_python PROPERTIES SUFFIX .pyd)
 endif(WIN32)
 
 install(TARGETS ${MOVEIT_LIB_NAME}_python
