@@ -93,7 +93,6 @@ target_link_libraries(${PROJECT_NAME}_tools
   ${Boost_LIBRARIES}
   ${QT_LIBRARIES}
 )
-set_target_properties(${PROJECT_NAME}_tools PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # Main Widgets Library - all screens (navigation options)
 add_library(${PROJECT_NAME}_widgets
@@ -126,7 +125,6 @@ target_link_libraries(${PROJECT_NAME}_widgets
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
 )
-set_target_properties(${PROJECT_NAME}_widgets PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # executables
 add_executable(${PROJECT_NAME} src/setup_assistant_main.cpp)

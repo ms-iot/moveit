@@ -3,7 +3,6 @@ set(MOVEIT_LIB_NAME moveit_planning_scene_interface)
 add_library(${MOVEIT_LIB_NAME} src/planning_scene_interface.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${MOVEIT_LIB_NAME} moveit_common_planning_interface_objects ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_library(${MOVEIT_LIB_NAME}_python src/wrap_python_planning_scene_interface.cpp)
 set_target_properties(${MOVEIT_LIB_NAME}_python PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")

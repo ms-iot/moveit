@@ -10,7 +10,6 @@ target_link_libraries(${MOVEIT_LIB_NAME}
   moveit_planning_scene_monitor
   ${catkin_LIBRARIES} ${Boost_LIBRARIES}
   )
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS ${MOVEIT_LIB_NAME}
         LIBRARY DESTINATION ${CATKIN_GLOBAL_LIB_DESTINATION}

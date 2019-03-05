@@ -9,8 +9,6 @@ add_dependencies(${MOVEIT_LIB_NAME}_core ${sensor_msgs_EXPORTED_TARGETS})
 add_library(${MOVEIT_LIB_NAME} src/updater_plugin.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${MOVEIT_LIB_NAME} ${MOVEIT_LIB_NAME}_core ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(TARGETS ${MOVEIT_LIB_NAME}_core ${MOVEIT_LIB_NAME}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

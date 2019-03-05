@@ -39,7 +39,6 @@ target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 if(WIN32)
   target_link_libraries(${MOVEIT_LIB_NAME} ws2_32)
 endif()
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_executable(moveit_run_benchmark src/RunBenchmark.cpp)
 target_link_libraries(moveit_run_benchmark ${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})

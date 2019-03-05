@@ -10,7 +10,6 @@ add_library(${MOVEIT_LIB_NAME}
   src/warehouse_connector.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_executable(moveit_warehouse_broadcast src/broadcast.cpp)
 target_link_libraries(moveit_warehouse_broadcast ${catkin_LIBRARIES} ${MOVEIT_LIB_NAME} ${Boost_LIBRARIES} )

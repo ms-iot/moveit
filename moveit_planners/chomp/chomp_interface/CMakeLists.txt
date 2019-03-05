@@ -38,7 +38,6 @@ include_directories(
 add_library(${PROJECT_NAME} src/chomp_interface.cpp src/chomp_planning_context.cpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
-set_target_properties(${PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 add_library(chomp_planner_plugin src/chomp_plugin.cpp)
 set_target_properties(chomp_planner_plugin PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")

@@ -44,7 +44,6 @@ add_library(${MOVEIT_LIB_NAME}
   src/robot_interaction.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${MOVEIT_LIB_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 if (CATKIN_ENABLE_TESTING)
   catkin_add_gtest(locked_robot_state_test test/locked_robot_state_test.cpp)

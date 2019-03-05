@@ -18,13 +18,11 @@ target_link_libraries(${MOVEIT_LIB_NAME}_core
   moveit_planning_scene_rviz_plugin_core
   ${catkin_LIBRARIES} ${OGRE_LIBRARIES} ${QT_LIBRARIES} ${Boost_LIBRARIES}
 )
-set_target_properties(${MOVEIT_LIB_NAME}_core PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 # Plugin Initializer
 add_library(${MOVEIT_LIB_NAME} src/plugin_init.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 target_link_libraries(${MOVEIT_LIB_NAME} ${MOVEIT_LIB_NAME}_core ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
 
 install(DIRECTORY include/ DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
 
