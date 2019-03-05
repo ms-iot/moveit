@@ -36,8 +36,6 @@
 
 /* Author: Ioan Sucan, Sachin Chitta */
 
-#define _USE_MATH_DEFINES
-
 #include <stdexcept>
 #include <sstream>
 #include <memory>

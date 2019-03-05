@@ -46,12 +46,12 @@
 
 #ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
   #ifdef moveit_collision_detection_fcl_EXPORTS // we are building a shared lib/dll
-    #define CD_FCL_DECL ROS_HELPER_EXPORT
+    #define MOVEIT_COLLISION_DETECTION_FCL_DECL ROS_HELPER_EXPORT
   #else // we are using shared lib/dll
-    #define CD_FCL_DECL ROS_HELPER_IMPORT
+    #define MOVEIT_COLLISION_DETECTION_FCL_DECL ROS_HELPER_IMPORT
   #endif
 #else // ros is being built around static libraries
-  #define CD_FCL_DECL
+  #define MOVEIT_COLLISION_DETECTION_FCL_DECL
 #endif
 
 namespace collision_detection
@@ -61,7 +61,7 @@ class CollisionDetectorAllocatorFCL
     : public CollisionDetectorAllocatorTemplate<CollisionWorldFCL, CollisionRobotFCL, CollisionDetectorAllocatorFCL>
 {
 public:
-  static CD_FCL_DECL const std::string NAME_;  // defined in collision_world_fcl.cpp
+  static MOVEIT_COLLISION_DETECTION_FCL_DECL const std::string NAME_;  // defined in collision_world_fcl.cpp
 };
 }
 
