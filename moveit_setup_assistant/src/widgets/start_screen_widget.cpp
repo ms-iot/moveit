@@ -405,7 +405,7 @@ bool StartScreenWidget::loadExistingFiles()
   fs::path kinematics_yaml_path = config_data_->config_pkg_path_;
   kinematics_yaml_path /= "config/kinematics.yaml";
 
-  if (!config_data_->inputKinematicsYAML(kinematics_yaml_path.make_preferred().native()))
+  if (!config_data_->inputKinematicsYAML(kinematics_yaml_path.make_preferred().string()))
   {
     QMessageBox::warning(this, "No Kinematic YAML File",
                          QString("Failed to parse kinematics yaml file. This file is not critical but any previous "
@@ -421,11 +421,11 @@ bool StartScreenWidget::loadExistingFiles()
   // Load ros controllers yaml file if available-----------------------------------------------
   fs::path ros_controllers_yaml_path = config_data_->config_pkg_path_;
   ros_controllers_yaml_path /= "config/ros_controllers.yaml";
-  config_data_->inputROSControllersYAML(ros_controllers_yaml_path.make_preferred().native());
+  config_data_->inputROSControllersYAML(ros_controllers_yaml_path.make_preferred().string());
 
   fs::path ompl_yaml_path = config_data_->config_pkg_path_;
   ompl_yaml_path /= "config/ompl_planning.yaml";
-  config_data_->inputOMPLYAML(ompl_yaml_path.make_preferred().native());
+  config_data_->inputOMPLYAML(ompl_yaml_path.make_preferred().string());
 
   // DONE LOADING --------------------------------------------------------------------------
 
@@ -786,12 +786,12 @@ bool StartScreenWidget::load3DSensorsFile()
 
   if (!fs::is_regular_file(sensors_3d_yaml_path))
   {
-    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().native());
+    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().string());
   }
   else
   {
-    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().native(),
-                                            sensors_3d_yaml_path.make_preferred().native());
+    return config_data_->input3DSensorsYAML(default_sensors_3d_yaml_path.make_preferred().string(),
+                                            sensors_3d_yaml_path.make_preferred().string());
   }
 }
 

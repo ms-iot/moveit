@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(moveit_core)
 
-add_compile_options(-std=c++14)
+set(CMAKE_CXX_STANDARD 14)
 
+if(NOT MSVC)
 # Warnings
 add_compile_options(-Wall -Wextra
   -Wwrite-strings -Wunreachable-code -Wpointer-arith -Wredundant-decls -Wcast-qual
   -Wno-unused-parameter -Wno-unused-function)
+endif()
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # This too often has false-positives
   add_compile_options(-Wno-maybe-uninitialized)
@@ -20,7 +22,11 @@ if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
+if(WIN32)
+find_package(Boost REQUIRED system filesystem date_time thread iostreams zlib)
+else()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams)
+endif()
 find_package(Eigen3 REQUIRED)
 
 find_package(PkgConfig REQUIRED)
@@ -28,6 +34,12 @@ pkg_check_modules(LIBFCL_PC REQUIRED fcl)
 # find *absolute* paths to LIBFCL_INCLUDE_DIRS and LIBFCL_LIBRARIES
 find_path(LIBFCL_INCLUDE_DIRS fcl/config.h HINTS ${LIBFCL_PC_INCLUDE_DIR} ${LIBFCL_PC_INCLUDE_DIRS})
 find_library(LIBFCL_LIBRARIES fcl HINTS ${LIBFCL_PC_LIBRARY_DIRS})
+
+if(WIN32)
+pkg_check_modules(LIBCCD REQUIRED ccd)
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+endif()
 
 find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)

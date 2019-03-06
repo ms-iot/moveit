@@ -5,7 +5,9 @@ if(CATKIN_ENABLE_TESTING)
 
   catkin_add_executable_with_gtest(test_kinematics_plugin test_kinematics_plugin.cpp)
   target_link_libraries(test_kinematics_plugin ${catkin_LIBRARIES} ${xmlrpcpp_LIBRARIES})
+  if(NOT MSVC)
   target_compile_options(test_kinematics_plugin PRIVATE -Wno-deprecated-declarations)
+  endif()
 
   set(DEPS DEPENDENCIES test_kinematics_plugin)
   set(ARGS ARGS ik_plugin:=kdl_kinematics_plugin/KDLKinematicsPlugin)

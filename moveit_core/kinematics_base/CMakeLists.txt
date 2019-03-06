@@ -4,7 +4,9 @@ add_library(${MOVEIT_LIB_NAME} src/kinematics_base.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 # Avoid warnings about deprecated members of KinematicsBase when building KinematicsBase itself.
 # TODO: remove when deperecated variables (tip_frame_, search_discretization_) are finally removed.
+if(NOT MSVC)
 target_compile_options(${MOVEIT_LIB_NAME} PRIVATE -Wno-deprecated-declarations)
+endif()
 
 # This line is needed to ensure that messages are done being built before this is built
 add_dependencies(${MOVEIT_LIB_NAME} ${catkin_EXPORTED_TARGETS})

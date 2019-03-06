@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(moveit_ros_control_interface)
 
-add_compile_options(-std=c++14)
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(catkin REQUIRED COMPONENTS
   actionlib

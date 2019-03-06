@@ -352,10 +352,10 @@ public:
   }
 
   /** \brief Compute random values for the state of the joint group */
-  void getVariableRandomPositionsNearBy(random_numbers::RandomNumberGenerator& rng, double* values, const double* near,
+  void getVariableRandomPositionsNearBy(random_numbers::RandomNumberGenerator& rng, double* values, const double* _near,
                                         const std::vector<double>& distances) const
   {
-    getVariableRandomPositionsNearBy(rng, values, active_joint_models_bounds_, near, distances);
+    getVariableRandomPositionsNearBy(rng, values, active_joint_models_bounds_, _near, distances);
   }
   /** \brief Compute random values for the state of the joint group */
   void getVariableRandomPositionsNearBy(random_numbers::RandomNumberGenerator& rng, std::vector<double>& values,

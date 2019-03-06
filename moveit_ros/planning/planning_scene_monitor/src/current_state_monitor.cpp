@@ -444,20 +444,20 @@ void planning_scene_monitor::CurrentStateMonitor::tfCallback()
         continue;
       joint_time_[joint] = latest_common_time;
 
-      auto new_values = std::unique_ptr<double[]>(new double[joint->getStateSpaceDimension()]);
+      std::vector<double> new_values(joint->getStateSpaceDimension());
       const robot_model::LinkModel* link = joint->getChildLinkModel();
       if (link->jointOriginTransformIsIdentity())
-        joint->computeVariablePositions(tf2::transformToEigen(transf), new_values.get());
+        joint->computeVariablePositions(tf2::transformToEigen(transf), new_values.data());
       else
         joint->computeVariablePositions(link->getJointOriginTransform().inverse() * tf2::transformToEigen(transf),
-                                        new_values);
+                                        new_values.data());
 
-      if (joint->distance(new_values.get(), robot_state_.getJointPositions(joint)) > 1e-5)
+      if (joint->distance(new_values.data(), robot_state_.getJointPositions(joint)) > 1e-5)
       {
         changes = true;
       }
 
-      robot_state_.setJointPositions(joint, new_values.get());
+      robot_state_.setJointPositions(joint, new_values.data());
       update = true;
     }
   }
