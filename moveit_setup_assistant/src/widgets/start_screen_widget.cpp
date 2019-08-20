@@ -59,6 +59,11 @@
 // MoveIt
 #include <moveit/rdf_loader/rdf_loader.h>
 
+#ifdef WIN32
+#include <direct.h>
+#define chdir _chdir
+#endif
+
 namespace moveit_setup_assistant
 {
 // Boost file system
@@ -561,7 +566,7 @@ bool StartScreenWidget::loadURDFFile(const std::string& urdf_file_path, const st
   while (!nh.ok() && steps < 4)
   {
     ROS_WARN("Waiting for node handle");
-    sleep(1);
+    ros::Duration(1).sleep();
     steps++;
     ros::spinOnce();
   }
@@ -610,7 +615,7 @@ bool StartScreenWidget::setSRDFFile(const std::string& srdf_string)
   while (!nh.ok() && steps < 4)
   {
     ROS_WARN("Waiting for node handle");
-    sleep(1);
+    ros::Duration(1).sleep();
     steps++;
     ros::spinOnce();
   }

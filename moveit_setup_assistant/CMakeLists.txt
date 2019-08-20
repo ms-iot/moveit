@@ -45,6 +45,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 find_package(PkgConfig)
 pkg_check_modules(YAMLCPP REQUIRED yaml-cpp>=0.5)
 include_directories(${YAMLCPP_INCLUDE_DIRS})
+link_directories(${YAMLCPP_LIBRARY_DIRS})
 
 catkin_package(
   INCLUDE_DIRS

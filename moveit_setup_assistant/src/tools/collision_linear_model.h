@@ -42,11 +42,24 @@
 
 #ifndef Q_MOC_RUN
 #include <moveit/setup_assistant/tools/compute_default_collisions.h>
+#include <ros/macros.h>
+
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_setup_assistant_tools_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_SETUP_ASSISTANT_TOOLS_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_SETUP_ASSISTANT_TOOLS_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_SETUP_ASSISTANT_TOOLS_DECL
+#endif
 #endif
 
 #include "collision_matrix_model.h"
 
-class CollisionLinearModel : public QAbstractProxyModel
+class MOVEIT_SETUP_ASSISTANT_TOOLS_DECL CollisionLinearModel : public QAbstractProxyModel
 {
   Q_OBJECT
 
@@ -76,7 +89,7 @@ public:
 };
 
 /** proxy model to allow for sorting of CollisionLinearModel, considering sorting history */
-class SortFilterProxyModel : public QSortFilterProxyModel
+class MOVEIT_SETUP_ASSISTANT_TOOLS_DECL SortFilterProxyModel : public QSortFilterProxyModel
 {
   Q_OBJECT
 

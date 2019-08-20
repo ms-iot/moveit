@@ -39,6 +39,18 @@
 #include <moveit/mesh_filter/sensor_model.h>
 #include <string>
 
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_mesh_filter_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_MESH_FILTER_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_MESH_FILTER_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_MESH_FILTER_DECL
+#endif
+
 namespace mesh_filter
 {
 /**
@@ -148,18 +160,18 @@ public:
   };
 
   /** \brief predefined sensor model for OpenNI compatible devices (e.g., PrimeSense, Kinect, Asus Xtion) */
-  static const StereoCameraModel::Parameters& REGISTERED_PSDK_PARAMS;
+  static MOVEIT_MESH_FILTER_DECL const StereoCameraModel::Parameters& REGISTERED_PSDK_PARAMS;
 
   /** \brief source code of the vertex shader used to render the meshes*/
-  static const std::string RENDER_VERTEX_SHADER_SOURCE;
+  static MOVEIT_MESH_FILTER_DECL const std::string RENDER_VERTEX_SHADER_SOURCE;
 
   /** \brief source code of the fragment shader used to render the meshes*/
-  static const std::string RENDER_FRAGMENT_SHADER_SOURCE;
+  static MOVEIT_MESH_FILTER_DECL const std::string RENDER_FRAGMENT_SHADER_SOURCE;
 
   /** \brief source code of the vertex shader used to filter the depth map*/
-  static const std::string FILTER_VERTEX_SHADER_SOURCE;
+  static MOVEIT_MESH_FILTER_DECL const std::string FILTER_VERTEX_SHADER_SOURCE;
 
   /** \brief source code of the fragment shader used to filter the depth map*/
-  static const std::string FILTER_FRAGMENT_SHADER_SOURCE;
+  static MOVEIT_MESH_FILTER_DECL const std::string FILTER_FRAGMENT_SHADER_SOURCE;
 };
 }  // namespace mesh_filter
