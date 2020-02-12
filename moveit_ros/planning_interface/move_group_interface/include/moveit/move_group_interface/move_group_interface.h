@@ -55,6 +55,20 @@
 #include <memory>
 #include <tf2_ros/buffer.h>
 
+#include <ros/macros.h>
+
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_move_group_interface_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_MOVE_GROUP_INTERFACE_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_MOVE_GROUP_INTERFACE_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_MOVE_GROUP_INTERFACE_DECL
+#endif
+
 namespace moveit
 {
 /** \brief Simple interface to MoveIt! components */
@@ -96,7 +110,7 @@ MOVEIT_CLASS_FORWARD(MoveGroupInterface);
     \brief Client class to conveniently use the ROS interfaces provided by the move_group node.
 
     This class includes many default settings to make things easy to use. */
-class MoveGroupInterface
+class MOVEIT_MOVE_GROUP_INTERFACE_DECL MoveGroupInterface
 {
 public:
   /** \brief Default ROS parameter name from where to read the robot's URDF. Set to 'robot_description' */

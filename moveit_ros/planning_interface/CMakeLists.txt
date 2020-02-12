@@ -26,6 +26,9 @@ find_package(catkin REQUIRED COMPONENTS
   rosconsole
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(EIGENPY REQUIRED eigenpy)
+
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibs "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}" REQUIRED)
 
@@ -80,12 +83,15 @@ catkin_package(
 
 include_directories(${THIS_PACKAGE_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
+                    ${EIGENPY_INCLUDE_DIRS}
                     ${catkin_INCLUDE_DIRS})
 
 include_directories(SYSTEM
                     ${EIGEN3_INCLUDE_DIRS}
                     ${eigenpy_INCLUDE_DIRS}
                     ${PYTHON_INCLUDE_DIRS})
+
+link_directories(${EIGENPY_LIBRARY_DIRS})
 
 add_subdirectory(py_bindings_tools)
 add_subdirectory(common_planning_interface_objects)
