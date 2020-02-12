@@ -49,6 +49,18 @@
 
 #include <memory>
 
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_trajectory_execution_manager_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_TRAJECTORY_EXECUTION_MANAGER_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_TRAJECTORY_EXECUTION_MANAGER_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_TRAJECTORY_EXECUTION_MANAGER_DECL
+#endif
+
 namespace trajectory_execution_manager
 {
 MOVEIT_CLASS_FORWARD(TrajectoryExecutionManager);  // Defines TrajectoryExecutionManagerPtr, ConstPtr, WeakPtr... etc
@@ -59,7 +71,7 @@ MOVEIT_CLASS_FORWARD(TrajectoryExecutionManager);  // Defines TrajectoryExecutio
 class TrajectoryExecutionManager
 {
 public:
-  static const std::string EXECUTION_EVENT_TOPIC;
+  static MOVEIT_TRAJECTORY_EXECUTION_MANAGER_DECL const std::string EXECUTION_EVENT_TOPIC;
 
   /// Definition of the function signature that is called when the execution of all the pushed trajectories completes.
   /// The status of the overall execution is passed as argument

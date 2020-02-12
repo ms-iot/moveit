@@ -108,7 +108,7 @@ int main(int argc, char** argv)
   auto joint_servo_pub = nh.advertise<control_msgs::JointJog>(servo.getParameters().joint_command_in_topic, 1);
 
   ros::Rate cmd_rate(100);
-  uint num_commands = 0;
+  std::size_t num_commands = 0;
 
   // Send a few Cartesian velocity commands
   while (ros::ok() && num_commands < 200)

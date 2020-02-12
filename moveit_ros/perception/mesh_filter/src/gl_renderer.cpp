@@ -52,7 +52,7 @@
 
 using namespace std;
 
-mesh_filter::GLRenderer::GLRenderer(unsigned width, unsigned height, float near, float far)
+mesh_filter::GLRenderer::GLRenderer(unsigned width, unsigned height, float _near, float _far)
   : width_(width)
   , height_(height)
   , fbo_id_(0)
@@ -60,8 +60,8 @@ mesh_filter::GLRenderer::GLRenderer(unsigned width, unsigned height, float near,
   , rgb_id_(0)
   , depth_id_(0)
   , program_(0)
-  , near_(near)
-  , far_(far)
+  , near_(_near)
+  , far_(_far)
   , fx_(width >> 1)  // 90 degree wide angle
   , fy_(fx_)
   , cx_(width >> 1)
@@ -89,14 +89,14 @@ void mesh_filter::GLRenderer::setBufferSize(unsigned width, unsigned height)
   }
 }
 
-void mesh_filter::GLRenderer::setClippingRange(float near, float far)
+void mesh_filter::GLRenderer::setClippingRange(float _near, float _far)
 {
   if (near_ <= 0)
     throw runtime_error("near clipping plane distance needs to be larger than 0");
   if (far_ <= near_)
     throw runtime_error("far clipping plane needs to be larger than near clipping plane distance");
-  near_ = near;
-  far_ = far;
+  near_ = _near;
+  far_ = _far;
 }
 
 void mesh_filter::GLRenderer::setCameraParameters(float fx, float fy, float cx, float cy)

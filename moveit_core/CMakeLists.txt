@@ -26,7 +26,7 @@ endif()
 
 # boost::iostreams on Windows depends on boost::zlib
 if(WIN32)
-  set(EXTRA_BOOST_COMPONENTS zlib)
+  # set(EXTRA_BOOST_COMPONENTS zlib)
 endif()
 find_package(Boost REQUIRED system filesystem date_time thread iostreams regex ${EXTRA_BOOST_COMPONENTS})
 find_package(Eigen3 REQUIRED)
@@ -34,7 +34,7 @@ find_package(Eigen3 REQUIRED)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 # TODO: Move collision detection into separate packages
-find_package(Bullet 2.87)
+find_package(Bullet CONFIG 2.87)
 
 # TODO(j-petit): Version check can be dropped when Xenial reaches end-of-life
 if(BULLET_FOUND)
@@ -55,6 +55,12 @@ foreach(_lib ${LIBFCL_PC_LIBRARIES})
   find_library(_lib_${_lib} ${_lib} HINTS ${LIBFCL_PC_LIBRARY_DIRS})
   list(APPEND LIBFCL_LIBRARIES ${_lib_${_lib}})
 endforeach()
+
+if(WIN32)
+pkg_check_modules(LIBCCD REQUIRED ccd)
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+endif()
 
 find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)
@@ -83,6 +89,7 @@ COMPONENTS
   urdf
   visualization_msgs
   xmlrpcpp
+  pluginlib
 )
 
 set(VERSION_FILE_PATH "${CATKIN_DEVEL_PREFIX}/include")

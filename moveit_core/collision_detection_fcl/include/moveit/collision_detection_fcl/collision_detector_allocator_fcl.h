@@ -39,6 +39,19 @@
 #include <moveit/collision_detection/collision_detector_allocator.h>
 #include <moveit/collision_detection_fcl/collision_env_fcl.h>
 
+
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_collision_detection_fcl_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_COLLISION_DETECTION_FCL_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_COLLISION_DETECTION_FCL_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_COLLISION_DETECTION_FCL_DECL
+#endif
+
 namespace collision_detection
 {
 /** \brief An allocator for FCL collision detectors */
@@ -46,6 +59,6 @@ class CollisionDetectorAllocatorFCL
   : public CollisionDetectorAllocatorTemplate<CollisionEnvFCL, CollisionDetectorAllocatorFCL>
 {
 public:
-  static const std::string NAME;  // defined in collision_env_fcl.cpp
+  MOVEIT_COLLISION_DETECTION_FCL_DECL static const std::string NAME;  // defined in collision_env_fcl.cpp
 };
 }  // namespace collision_detection
