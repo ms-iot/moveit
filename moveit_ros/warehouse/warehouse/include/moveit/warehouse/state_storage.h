@@ -41,6 +41,18 @@
 #include <moveit/macros/class_forward.h>
 #include <moveit_msgs/RobotState.h>
 
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_warehouse_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_WAREHOUSE_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_WAREHOUSE_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_WAREHOUSE_DECL
+#endif
+
 namespace moveit_warehouse
 {
 typedef warehouse_ros::MessageWithMetadata<moveit_msgs::RobotState>::ConstPtr RobotStateWithMetadata;
@@ -51,10 +63,10 @@ MOVEIT_CLASS_FORWARD(RobotStateStorage);  // Defines RobotStateStoragePtr, Const
 class RobotStateStorage : public MoveItMessageStorage
 {
 public:
-  static const std::string DATABASE_NAME;
+  static MOVEIT_WAREHOUSE_DECL const std::string DATABASE_NAME;
 
-  static const std::string STATE_NAME;
-  static const std::string ROBOT_NAME;
+  static MOVEIT_WAREHOUSE_DECL const std::string STATE_NAME;
+  static MOVEIT_WAREHOUSE_DECL const std::string ROBOT_NAME;
 
   RobotStateStorage(warehouse_ros::DatabaseConnection::Ptr conn);
 

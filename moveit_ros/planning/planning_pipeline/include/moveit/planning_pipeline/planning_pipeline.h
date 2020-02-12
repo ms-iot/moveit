@@ -44,6 +44,18 @@
 
 #include <memory>
 
+// Import/export for windows dll's and visibility for gcc shared libraries.
+
+#ifdef ROS_BUILD_SHARED_LIBS // ros is being built around shared libraries
+  #ifdef moveit_planning_pipeline_EXPORTS // we are building a shared lib/dll
+    #define MOVEIT_PLANNING_PIPELINE_DECL ROS_HELPER_EXPORT
+  #else // we are using shared lib/dll
+    #define MOVEIT_PLANNING_PIPELINE_DECL ROS_HELPER_IMPORT
+  #endif
+#else // ros is being built around static libraries
+  #define MOVEIT_PLANNING_PIPELINE_DECL
+#endif
+
 /** \brief Planning pipeline */
 namespace planning_pipeline
 {
@@ -58,15 +70,15 @@ class PlanningPipeline
 public:
   /** \brief When motion plans are computed and they are supposed to be automatically displayed, they are sent to this
    * topic (moveit_msgs::DisplauTrajectory) */
-  static const std::string DISPLAY_PATH_TOPIC;
+  static MOVEIT_PLANNING_PIPELINE_DECL const std::string DISPLAY_PATH_TOPIC;
 
   /** \brief When motion planning requests are received and they are supposed to be automatically published, they are
    * sent to this topic (moveit_msgs::MotionPlanRequest) */
-  static const std::string MOTION_PLAN_REQUEST_TOPIC;
+  static MOVEIT_PLANNING_PIPELINE_DECL const std::string MOTION_PLAN_REQUEST_TOPIC;
 
   /** \brief When contacts are found in the solution path reported by a planner, they can be published as markers on
    * this topic (visualization_msgs::MarkerArray) */
-  static const std::string MOTION_CONTACTS_TOPIC;
+  static MOVEIT_PLANNING_PIPELINE_DECL const std::string MOTION_CONTACTS_TOPIC;
 
   /** \brief Given a robot model (\e model), a node handle (\e nh), initialize the planning pipeline.
       \param model The robot model for which this pipeline is initialized.

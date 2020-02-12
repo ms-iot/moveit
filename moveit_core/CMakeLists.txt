@@ -43,6 +43,12 @@ foreach(_lib ${LIBFCL_PC_LIBRARIES})
   list(APPEND LIBFCL_LIBRARIES ${_lib_${_lib}})
 endforeach()
 
+if(WIN32)
+pkg_check_modules(LIBCCD REQUIRED ccd)
+find_library(LIBCCD_LIBRARIES_FULL ${LIBCCD_LIBRARIES} ${LIBCCD_LIBRARY_DIRS})
+set(LIBCCD_LIBRARIES "${LIBCCD_LIBRARIES_FULL}")
+endif()
+
 find_package(octomap REQUIRED)
 find_package(urdfdom REQUIRED)
 find_package(urdfdom_headers REQUIRED)
@@ -69,6 +75,7 @@ COMPONENTS
   urdf
   visualization_msgs
   xmlrpcpp
+  pluginlib
 )
 
 set(VERSION_FILE_PATH "${CATKIN_DEVEL_PREFIX}/include")
