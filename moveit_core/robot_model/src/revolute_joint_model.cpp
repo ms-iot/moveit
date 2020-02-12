@@ -109,17 +109,17 @@ void RevoluteJointModel::getVariableRandomPositions(random_numbers::RandomNumber
 }
 
 void RevoluteJointModel::getVariableRandomPositionsNearBy(random_numbers::RandomNumberGenerator& rng, double* values,
-                                                          const Bounds& bounds, const double* near,
+                                                          const Bounds& bounds, const double* _near,
                                                           const double distance) const
 {
   if (continuous_)
   {
-    values[0] = rng.uniformReal(near[0] - distance, near[0] + distance);
+    values[0] = rng.uniformReal(_near[0] - distance, _near[0] + distance);
     enforcePositionBounds(values, bounds);
   }
   else
-    values[0] = rng.uniformReal(std::max(bounds[0].min_position_, near[0] - distance),
-                                std::min(bounds[0].max_position_, near[0] + distance));
+    values[0] = rng.uniformReal(std::max(bounds[0].min_position_, _near[0] - distance),
+                                std::min(bounds[0].max_position_, _near[0] + distance));
 }
 
 void RevoluteJointModel::interpolate(const double* from, const double* to, const double t, double* state) const
