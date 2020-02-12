@@ -2,7 +2,7 @@ set(MOVEIT_LIB_NAME moveit_move_group_interface)
 
 add_library(${MOVEIT_LIB_NAME} src/move_group_interface.cpp)
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-target_link_libraries(${MOVEIT_LIB_NAME} moveit_common_planning_interface_objects moveit_planning_scene_interface ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(${MOVEIT_LIB_NAME} moveit_common_planning_interface_objects moveit_planning_scene_interface ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${EIGENPY_LIBRARIES})
 add_dependencies(${MOVEIT_LIB_NAME} ${catkin_EXPORTED_TARGETS})
 
 add_library(${MOVEIT_LIB_NAME}_python src/wrap_python_move_group.cpp)

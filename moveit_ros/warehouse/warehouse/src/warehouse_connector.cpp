@@ -36,7 +36,9 @@
 
 #include <sys/types.h>
 #include <signal.h>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <ros/ros.h>
 #include <moveit/warehouse/warehouse_connector.h>
 
@@ -48,12 +50,15 @@ WarehouseConnector::WarehouseConnector(const std::string& dbexec) : dbexec_(dbex
 
 WarehouseConnector::~WarehouseConnector()
 {
+#ifndef WIN32
   if (child_pid_ != 0)
     kill(child_pid_, SIGTERM);
+#endif
 }
 
 bool WarehouseConnector::connectToDatabase(const std::string& dirname)
 {
+#ifndef WIN32
   if (child_pid_ != 0)
     kill(child_pid_, SIGTERM);
 
@@ -98,5 +103,8 @@ bool WarehouseConnector::connectToDatabase(const std::string& dirname)
     ros::WallDuration(1.0).sleep();
   }
   return true;
+#else
+  return false;
+#endif
 }
 }  // namespace moveit_warehouse

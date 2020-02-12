@@ -269,7 +269,7 @@ bool plan_execution::PlanExecution::isRemainingPathValid(const ExecutableMotionP
 }
 
 bool plan_execution::PlanExecution::isRemainingPathValid(const ExecutableMotionPlan& plan,
-                                                         const std::pair<int, int>& path_segment)
+                                                         const std::pair<std::size_t, int>& path_segment)
 {
   if (path_segment.first >= 0 &&
       plan.plan_components_[path_segment.first].trajectory_monitoring_)  // If path_segment.second <= 0, the function
