@@ -24,6 +24,8 @@ RUN \
         python3-catkin-tools python3-osrf-pycommon \
         clang clang-format-10 clang-tidy clang-tools \
         ccache && \
+    # Manually install catkin-tools from latest HEAD (TODO: remove if re-released)
+    pip3 install git+https://github.com/catkin/catkin_tools.git && \
     #
     # Build and install franka_description from https://github.com/frankaemika/franka_ros.git
     git clone --depth 1 --branch 0.6.0 https://github.com/frankaemika/franka_ros.git src/franka_ros && \
