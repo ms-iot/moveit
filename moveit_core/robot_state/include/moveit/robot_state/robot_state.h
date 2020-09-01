@@ -1277,7 +1277,7 @@ public:
    *  corresponding value in \e near.  \distance represents meters for
    *  prismatic/postitional joints and radians for revolute/orientation joints.
    *  Resulting values are clamped within default bounds. */
-  void setToRandomPositionsNearBy(const JointModelGroup* group, const RobotState& near, double distance);
+  void setToRandomPositionsNearBy(const JointModelGroup* group, const RobotState& _near, double distance);
 
   /** \brief Set all joints in \e group to random values near the value in \near.
    *  \e distances \b MUST have the same size as \c
@@ -1286,7 +1286,7 @@ public:
    *  corresponding value in \e near.  \distance represents meters for
    *  prismatic/postitional joints and radians for revolute/orientation joints.
    *  Resulting values are clamped within default bounds. */
-  void setToRandomPositionsNearBy(const JointModelGroup* group, const RobotState& near,
+  void setToRandomPositionsNearBy(const JointModelGroup* group, const RobotState& _near,
                                   const std::vector<double>& distances);
 
   /** @} */
