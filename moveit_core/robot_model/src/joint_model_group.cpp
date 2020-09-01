@@ -329,7 +329,7 @@ void JointModelGroup::getVariableRandomPositionsNearBy(random_numbers::RandomNum
   for (std::size_t i = 0; i < active_joint_model_vector_.size(); ++i)
     active_joint_model_vector_[i]->getVariableRandomPositionsNearBy(rng, values + active_joint_model_start_index_[i],
                                                                     *active_joint_bounds[i],
-                                                                    near + active_joint_model_start_index_[i],
+                                                                    _near + active_joint_model_start_index_[i],
                                                                     distance);
   updateMimicJoints(values);
 }
