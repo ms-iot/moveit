@@ -34,7 +34,7 @@ find_package(Eigen3 REQUIRED)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 # TODO: Move collision detection into separate packages
-find_package(Bullet 2.87)
+find_package(Bullet CONFIG 2.87)
 
 # TODO(j-petit): Version check can be dropped when Xenial reaches end-of-life
 if(BULLET_FOUND)
